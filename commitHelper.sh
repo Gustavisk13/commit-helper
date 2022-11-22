@@ -7,4 +7,5 @@ options=('')
 
 
 echo "args: ${args[@]}"
+#TODO can pass single letter option before, major example: -f "current file"
 
