@@ -8,4 +8,4 @@ definitions=('-f' '-d')
 options=('')
 
 
-echo "$#"
+echo "$# "
