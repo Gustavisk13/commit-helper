@@ -1,19 +1,19 @@
 Acessibilidade			        :wheelchair:	        acess_
-Adicionando um teste		    :white_check_mark:	    test
+Adicionando um teste		    :white_check_mark:	    test -a
 Adicionando uma dependência	    :heavy_plus_sign:	    build
 Alterações de revisão de código	:ok_hand:		        style
 Animações e transições		    :dizzy:			        anim_
 Bugfix				            :bug:			        fix
 Comentários			            :bulb:			        docs
 Commit inicial			        :tada:			        init
-Configuração			        :wrench:		        chore
+Configuração			        :wrench:		        config
 Deploy				            :rocket:		        deploy_
 Documentação			        :books:			        docs
-Em progresso			        :construction:		    
-Estilização de interface	    :lipstick:		        feat
+Em progresso			        :construction:		    progress
+Estilização de interface	    :lipstick:		        ui
 Infraestrutura			        :bricks:		        ci
 Lista de ideias (tasks)		    :soon:			        todo_
-Mover/Renomear			        :truck:			        chore
+Mover/Renomear			        :truck:			        move
 Novo recurso			        :sparkles:		        feat
 Package.json em JS		        :package:		        package
 Performance			            :zap:			        perf
@@ -21,12 +21,12 @@ Refatoração			            :recycle:		        refactor
 Removendo um arquivo		    :fire:			        remove -f
 Removendo uma dependência	    :heavy_minus_sign:	    remove -d
 Responsividade			        :iphone:		        resp_
-Revertendo mudanças		        :boom:			        fix
+Revertendo mudanças		        :boom:			        revert
 Segurança			            :lock:			        sec
 SEO				                :mag:			        seo
 Tag de versão			        :bookmark:		        tag
 Teste de aprovação		        :heavy_check_mark:	    approve
-Testes				            :test_tube:		        test
+Testes				            :test_tube:		        test -t
 Texto				            :pencil:		        text
 Tipagem				            :label:			        type
 Tratamento de erros		        :goal_net:		        error
