@@ -5,6 +5,8 @@
 #then its needeed to export the script to the bashrc and give it an alias
 
 #further implementations
+#option if user wants to add specific file or add it all
+#option if user wants to push the commit
 
 validate_flag() {
     local arr_var=($@)
@@ -30,6 +32,11 @@ validate_flag() {
     else
         exit 1
     fi
+}
+
+exports(){
+    local_path="$(pwd)/commitHelper.sh"
+    echo $local_path
 }
 
 #validates if it haves args
@@ -238,3 +245,5 @@ else
     echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
 fi
+
+exports
