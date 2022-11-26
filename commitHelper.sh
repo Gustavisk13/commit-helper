@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#some extra steps if script runs in windows
+#first its nedded to create an ~./bashrc file
+#then its needeed to export the script to the bashrc and give it an alias
+
+#further implementations
+
 validate_flag() {
     local arr_var=($@)
 
@@ -32,6 +38,11 @@ if [ "$#" -gt 0 ]; then
 else
     #implement default stdout message
     echo "Nao Possui"
+    exit 1
+fi
+
+if [ -z "$3" ]; then
+    echo "You must inform an message"
     exit 1
 fi
 
@@ -218,8 +229,12 @@ while true; do
     esac
 done
 
+message=$3
+
 if [ -z "$flag" ]; then
     echo "Chosen option: $emoji $option"
+    git commit -a -m "$emoji $option: $message"
 else
     echo "Chosen option: $emoji $option $flag"
+    git commit -a -m "$emoji $option: $message"
 fi
