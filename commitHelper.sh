@@ -237,5 +237,4 @@ if [ -z "$flag" ]; then
 else
     echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
-    
 fi
