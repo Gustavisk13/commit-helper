@@ -36,8 +36,8 @@ validate_flag() {
 
 exports(){
     local_path="$(pwd)/commitHelper.sh"
-    export PATH="$PATH:$local_path"
-    source $ZSH/oh-my-zsh.sh
+    eval export PATH="$PATH:$local_path"
+    source PATH
 }
 
 #validates if it haves args
