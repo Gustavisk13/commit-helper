@@ -46,18 +46,19 @@ while true; do
         option=$1
         flag=$(validate_flag $2 -a -t)
         if [ $? -eq 0 ]; then
+            if [ "$flag" = "-a" ]; then
+                emoji=":white_check_mark:"
+            else
+                emoji=":test_tube:"
+            fi
             break
         else
             echo "Invalid option $2"
             exit 1
         fi
 
-        if [ "$flag" = "-a" ]; then
-            emoji=":white_check_mark:"
-        else
-            emoji=":test_tube:"
-        fi
         ;;
+
     build)
         option=$1
         emoji=":heavy_plus_sign:"
@@ -152,18 +153,18 @@ while true; do
         option=$1
         flag=$(validate_flag $2 -f -d)
         if [ $? -eq 0 ]; then
+            if [ "$flag" = "-f" ]; then
+                emoji=":fire:"
+            else
+                emoji=":heavy_minus_sign:"
+            fi
             break
         else
             echo "Invalid option $2"
             exit 1
         fi
-
-        if [ "$flag" = "-f" ]; then
-            emoji=":fire:"
-        else
-            emoji=":heavy_minus_sign:"
-        fi
         ;;
+
     resp)
         option=$1
         emoji=":iphone:"
