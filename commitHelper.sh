@@ -1,4 +1,5 @@
 #!/bin/bash
+#exec /bin/zsh
 
 #some extra steps if script runs in windows
 #first its nedded to create an ~./bashrc file
@@ -13,8 +14,9 @@
 
 current_user=$(whoami)
 
+
 create_alias_zsh() {
-    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/gustavo/.zshrc && source $ZSH/oh-my-zsh.sh
+    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec `source ./zshrc`
 }
 
 validate_flag() {
