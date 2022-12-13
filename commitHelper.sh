@@ -13,25 +13,26 @@
 
 current_user=$(whoami)
 alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
+shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
 
-check_shell() {
-    local shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
-    if [[ "$shell" == "bash" ]]; then
-        echo "Im in BASH!"
-    elif [[ "$shell" == "zsh" ]]; then
-        echo "Im in ZSH!"
+create_alias() {
+    if [[ "$shell" = "zsh" ]]; then
+        sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
+    elif [[ "$shell" = "bash" ]]; then
+        sed -i "/bash-doc package/a\ alias gch=\"$1\"" /home/$current_user/.bashrc
     fi
 }
 
-create_alias_zsh() {
-    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
-}
-
 check_alias() {
-    check_shell
     if [[ -z "$alias_value" ]]; then
         echo "Alias não encontrado, execute o arquivo com o comando --install e dê source no seu shell!"
         exit 1
+    fi
+}
+
+check_os(){
+    if [[ "$OSTYPE" == "msys" ]]; then
+        touch C:\\Users\\$current_user\\.bashrc
     fi
 }
 
@@ -65,7 +66,7 @@ exports() {
     local_path="$(pwd)/commitHelper.sh"
 
     if [[ -z "$alias_value" ]]; then
-        create_alias_zsh $local_path
+        create_alias $local_path
         if [ $? -eq 0 ]; then
             echo 'Execute o comando source para finalizar a instalação!!!'
         else
@@ -94,6 +95,7 @@ elif [ "$1" = "--help" ]; then
 fi
 
 check_alias
+check_os
 
 while true; do
     case $1 in
