@@ -20,6 +20,7 @@ create_alias_zsh() {
     alias_value=`cat /home/$current_user/.zshrc | grep "gch="`
 
     if [[ -n "$alias_value" ]]; then
+    echo "Criando alias"
         sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec `source ./zshrc`
     fi
     
