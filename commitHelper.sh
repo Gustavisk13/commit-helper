@@ -8,6 +8,15 @@
 #option if user wants to add specific file or add it all
 #option if user wants to push the commit
 
+#alias creation if user uses zsh:
+#sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
+
+current_user=$(whoami)
+
+create_alias_zsh() {
+    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/gustavo/.zshrc && source ~/.zshrc
+}
+
 validate_flag() {
     local arr_var=($@)
 
@@ -34,9 +43,14 @@ validate_flag() {
     fi
 }
 
-exports(){
+exports() {
     local_path="$(pwd)/commitHelper.sh"
-    #export PATH="$PATH:$local_path"
+    create_alias_zsh $local_path
+    if [ $? -eq 0 ]; then
+        echo 'Alias OK'
+    else
+        echo 'Erro no Alias'
+    fi
 }
 
 #validates if it haves args
