@@ -20,6 +20,7 @@ create_alias_zsh() {
 }
 
 check_alias() {
+    echo $current_shell
     if [[ -z "$alias_value" ]]; then
         echo "Alias não encontrado, execute o arquivo com o comando --install e dê source no seu shell!"
         exit 1
