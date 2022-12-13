@@ -16,13 +16,8 @@ current_user=$(whoami)
 
 create_alias_zsh() {
 
-    alias_value=`cat /home/$current_user/.zshrc | grep "gch="`
+    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec /bin/zsh
 
-    if [[ -z "$alias_value" ]]; then
-    echo "Criando alias"
-        sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec /bin/zsh
-    fi
-    
 }
 
 validate_flag() {
@@ -53,12 +48,18 @@ validate_flag() {
 
 exports() {
     local_path="$(pwd)/commitHelper.sh"
-    create_alias_zsh $local_path
-    if [ $? -eq 0 ]; then
-        echo 'Alias OK'
-    else
-        echo 'Erro no Alias'
+
+    alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
+
+    if [[ -z "$alias_value" ]]; then
+        create_alias_zsh $local_path
+        if [ $? -eq 0 ]; then
+            echo 'Alias OK'
+        else
+            echo 'Erro no Alias'
+        fi
     fi
+
 }
 
 #validates if it haves args
