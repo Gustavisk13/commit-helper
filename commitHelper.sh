@@ -66,6 +66,11 @@ exports() {
     fi
 }
 
+help_options(){
+    sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1
+    exit 0
+}
+
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
     echo "Nao Possui"
@@ -74,6 +79,8 @@ fi
 
 if [ "$1" = "--install" ]; then
     exports
+elif [ "$1" = "--help" ]; then
+    help_options
 fi
 
 check_alias
@@ -275,7 +282,7 @@ if [ -z "$flag" ]; then
     message=$2
     echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
-    
+
 else
     if [ -z "$3" ]; then
         echo "You must inform an message"

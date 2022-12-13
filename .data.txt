@@ -1,18 +1,18 @@
-Acessibilidade			        :wheelchair:	        acess_
+Acessibilidade			        :wheelchair:	        acess
 Adicionando um teste		    :white_check_mark:	    test -a
 Adicionando uma dependência	    :heavy_plus_sign:	    build
 Alterações de revisão de código	:ok_hand:		        style
-Animações e transições		    :dizzy:			        anim_
+Animações e transições		    :dizzy:			        anim
 Bugfix				            :bug:			        fix
 Comentários			            :bulb:			        docs
 Commit inicial			        :tada:			        init
 Configuração			        :wrench:		        config
-Deploy				            :rocket:		        deploy_
+Deploy				            :rocket:		        deploy
 Documentação			        :books:			        docs
 Em progresso			        :construction:		    progress
 Estilização de interface	    :lipstick:		        ui
 Infraestrutura			        :bricks:		        ci
-Lista de ideias (tasks)		    :soon:			        todo_
+Lista de ideias (tasks)		    :soon:			        todo
 Mover/Renomear			        :truck:			        move
 Novo recurso			        :sparkles:		        feat
 Package.json em JS		        :package:		        package
