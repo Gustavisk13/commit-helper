@@ -18,9 +18,10 @@ create_alias_zsh() {
     sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
 }
 
-check_alias(){
+check_alias() {
     if [[ -z "$alias_value" ]]; then
-        echo "Alias não encontrado, execute o arquivo e dê source no seu shell!"
+        echo "Alias não encontrado, execute o arquivo com o comando --install e dê source no seu shell!"
+        exit 1
     fi
 }
 
@@ -56,24 +57,22 @@ exports() {
     if [[ -z "$alias_value" ]]; then
         create_alias_zsh $local_path
         if [ $? -eq 0 ]; then
-            echo 'Alias OK'
+            echo 'Execute o comando source para finalizar a instalação!!!'
         else
             echo 'Erro no Alias'
         fi
+    else
+        echo "Alias já existe, pulando instalação..."
     fi
 }
 
-
 #validates if it haves args
-if [ "$#" -gt 0 ]; then
-    echo "Possui"
-else
-    #implement default stdout message
+if [ ! "$#" -gt 0 ]; then
     echo "Nao Possui"
     exit 1
 fi
 
-if [ "$1" = "--install" ];then
+if [ "$1" = "--install" ]; then
     exports
 fi
 
