@@ -1,5 +1,4 @@
 #!/bin/bash
-#exec /bin/zsh
 
 #some extra steps if script runs in windows
 #first its nedded to create an ~./bashrc file
@@ -13,11 +12,16 @@
 #sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
 current_user=$(whoami)
+alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
 
 create_alias_zsh() {
+    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
+}
 
-    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec -c /bin/zsh
-
+check_alias(){
+    if [[ -z "$alias_value" ]]; then
+        echo "Alias não encontrado, execute o arquivo e dê source no seu shell!"
+    fi
 }
 
 validate_flag() {
@@ -49,8 +53,6 @@ validate_flag() {
 exports() {
     local_path="$(pwd)/commitHelper.sh"
 
-    alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
-
     if [[ -z "$alias_value" ]]; then
         create_alias_zsh $local_path
         if [ $? -eq 0 ]; then
@@ -59,9 +61,8 @@ exports() {
             echo 'Erro no Alias'
         fi
     fi
-
-
 }
+
 
 #validates if it haves args
 if [ "$#" -gt 0 ]; then
@@ -72,10 +73,17 @@ else
     exit 1
 fi
 
+if [ "$1" = "--install" ];then
+    exports
+fi
+
 if [ -z "$3" ]; then
     echo "You must inform an message"
     exit 1
+
 fi
+
+check_alias
 
 while true; do
     case $1 in
@@ -269,5 +277,3 @@ else
     echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
 fi
-
-exports
