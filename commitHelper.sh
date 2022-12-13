@@ -76,11 +76,10 @@ if [ "$1" = "--install" ]; then
     exports
 fi
 
-if [ -z "$3" ]; then
-    echo "You must inform an message"
-    exit 1
-
-fi
+#if [ -z "$3" ]; then
+#    echo "You must inform an message"
+#    exit 1
+#fi
 
 check_alias
 
@@ -266,6 +265,7 @@ while true; do
 
     esac
 done
+
 
 if [ -z "$flag" ]; then
     message=$2
