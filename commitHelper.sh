@@ -76,11 +76,6 @@ if [ "$1" = "--install" ]; then
     exports
 fi
 
-#if [ -z "$3" ]; then
-#    echo "You must inform an message"
-#    exit 1
-#fi
-
 check_alias
 
 while true; do
@@ -266,12 +261,20 @@ while true; do
     esac
 done
 
-
 if [ -z "$flag" ]; then
+    if [ -z "$2" ]; then
+        echo "You must inform an message"
+        exit 1
+    fi
+
     message=$2
     echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
 else
+    if [ -z "$3" ]; then
+        echo "You must inform an message"
+        exit 1
+    fi
     message=$3
     echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
