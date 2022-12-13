@@ -275,6 +275,7 @@ if [ -z "$flag" ]; then
     message=$2
     echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
+    
 else
     if [ -z "$3" ]; then
         echo "You must inform an message"
