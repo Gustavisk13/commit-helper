@@ -16,7 +16,7 @@ current_user=$(whoami)
 
 create_alias_zsh() {
 
-    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec /bin/zsh
+    sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc && exec -c /bin/zsh
 
 }
 
