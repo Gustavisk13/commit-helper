@@ -12,7 +12,7 @@
 #sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
 current_user=$(whoami)
-current_shell=$(grep'/bin' $SHELL | sed 's/^.*: //')
+current_shell=$(grep '/bin' $SHELL | sed 's/^.*: //')
 alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
 
 create_alias_zsh() {
