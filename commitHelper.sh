@@ -267,6 +267,11 @@ if [ -z "$flag" ]; then
         exit 1
     fi
 
+    if [[ "$2" =~ ^(-[a-zA-Z0-9]*)+$ ]]; then
+        echo "Mensagem Inválida: $2"
+        exit 1
+    fi
+
     message=$2
     echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
