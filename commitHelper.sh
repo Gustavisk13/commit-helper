@@ -66,7 +66,6 @@ exports() {
     fi
 }
 
-
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
     echo "Nao Possui"
@@ -268,12 +267,12 @@ while true; do
     esac
 done
 
-message=$3
-
 if [ -z "$flag" ]; then
+    message=$2
     echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
 else
+    message=$3
     echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
 fi
