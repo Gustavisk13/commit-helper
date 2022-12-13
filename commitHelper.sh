@@ -66,7 +66,6 @@ exports() {
     fi
 }
 
-
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
     echo "Nao Possui"
