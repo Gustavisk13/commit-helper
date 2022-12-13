@@ -12,15 +12,23 @@
 #sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
 current_user=$(whoami)
-current_shell=$(grep '/bin' $SHELL | sed 's/^.*: //')
 alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
+
+check_shell() {
+    local shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
+    if [[ "$shell" == "bash" ]]; then
+        echo "Im in BASH!"
+    elif [[ "$shell" == "zsh" ]]; then
+        echo "Im in ZSH!"
+    fi
+}
 
 create_alias_zsh() {
     sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
 }
 
 check_alias() {
-    echo $current_shell
+    check_shell
     if [[ -z "$alias_value" ]]; then
         echo "Alias não encontrado, execute o arquivo com o comando --install e dê source no seu shell!"
         exit 1
@@ -68,7 +76,7 @@ exports() {
     fi
 }
 
-help_options(){
+help_options() {
     sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1
     exit 0
 }
