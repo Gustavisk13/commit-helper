@@ -7,7 +7,6 @@
 #further implementations
 #option if user wants to add specific file or add it all
 #option if user wants to push the commit
-
 #alias creation if user uses zsh:
 #sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
