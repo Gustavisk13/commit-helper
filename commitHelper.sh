@@ -8,6 +8,34 @@
 #option if user wants to add specific file or add it all
 #option if user wants to push the commit
 
+#alias creation if user uses zsh:
+#sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
+
+current_user=$(whoami)
+alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
+shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
+
+create_alias() {
+    if [[ "$shell" = "zsh" ]]; then
+        sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
+    elif [[ "$shell" = "bash" ]]; then
+        sed -i "/bash-doc package/a\ alias gch=\"$1\"" /home/$current_user/.bashrc
+    fi
+}
+
+check_alias() {
+    if [[ -z "$alias_value" ]]; then
+        echo "Alias não encontrado, execute o arquivo com o comando --install e dê source no seu shell!"
+        exit 1
+    fi
+}
+
+check_os(){
+    if [[ "$OSTYPE" == "msys" ]]; then
+        touch C:\\Users\\$current_user\\.bashrc
+    fi
+}
+
 validate_flag() {
     local arr_var=($@)
 
@@ -34,25 +62,40 @@ validate_flag() {
     fi
 }
 
-exports(){
+exports() {
     local_path="$(pwd)/commitHelper.sh"
-    #export PATH="$PATH:$local_path"
-    echo "export PATH=\"\$PATH:$local_path\"" >> ~/.zshrc
+
+    if [[ -z "$alias_value" ]]; then
+        create_alias $local_path
+        if [ $? -eq 0 ]; then
+            echo 'Execute o comando source para finalizar a instalação!!!'
+        else
+            echo 'Erro no Alias'
+        fi
+    else
+        echo "Alias já existe, pulando instalação..."
+    fi
+}
+
+help_options() {
+    sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1
+    exit 0
 }
 
 #validates if it haves args
-if [ "$#" -gt 0 ]; then
-    echo "Possui"
-else
-    #implement default stdout message
+if [ ! "$#" -gt 0 ]; then
     echo "Nao Possui"
     exit 1
 fi
 
-if [ -z "$3" ]; then
-    echo "You must inform an message"
-    exit 1
+if [ "$1" = "--install" ]; then
+    exports
+elif [ "$1" = "--help" ]; then
+    help_options
 fi
+
+check_alias
+check_os
 
 while true; do
     case $1 in
@@ -237,14 +280,27 @@ while true; do
     esac
 done
 
-message=$3
-
 if [ -z "$flag" ]; then
+    if [ -z "$2" ]; then
+        echo "You must inform an message"
+        exit 1
+    fi
+
+    if [[ "$2" =~ ^(-[a-zA-Z0-9]*)+$ ]]; then
+        echo "Mensagem Inválida: $2"
+        exit 1
+    fi
+
+    message=$2
     echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
+
 else
+    if [ -z "$3" ]; then
+        echo "You must inform an message"
+        exit 1
+    fi
+    message=$3
     echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
 fi
-
-exports
