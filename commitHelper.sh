@@ -14,7 +14,6 @@
 
 current_user=$(whoami)
 
-
 create_alias_zsh() {
 
     alias_value=`cat /home/$current_user/.zshrc | grep "gch="`
