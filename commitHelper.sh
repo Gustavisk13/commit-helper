@@ -5,7 +5,6 @@
 #option if user wants to push the commit
 
 current_user=$(whoami)
-tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".gchtext")
 
 check_os() {
     if [[ "$OSTYPE" == "msys" ]]; then
@@ -82,26 +81,31 @@ exports() {
         echo "Alias já existe, pulando instalação..."
     fi
 
-    sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >> $tempfile
-    
 }
 
 help_options() {
-    cat $tempfile
+    if [[ -z "$temp" ]]; then
+        cat $tempfile
+    else
+        cat $temp
+    fi
     exit 0
 }
 
-check_temp(){
+check_temp() {
     temp=$(find /tmp/ -maxdepth 1 -type f -name '*.gchtext')
-    echo $temp
+    if [[ -z "$temp" ]]; then
+        tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".gchtext")
+        sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >>$tempfile
+    fi
 }
- 
+
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
     echo "Comando não encontrado, execute o comando --help para mais informações."
     exit 1
 fi
-
+check_temp
 check_os
 
 if [ "$1" = "--install" ]; then
@@ -113,7 +117,6 @@ elif [ "$1" = "--help" ]; then
 fi
 
 check_alias
-check_temp
 
 while true; do
     case $1 in
