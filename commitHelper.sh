@@ -95,7 +95,7 @@ check_temp(){
     temp=$(find /tmp/ -maxdepth 1 -type f -name '*.gchtext')
     echo $temp
 }
-
+ 
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
     echo "Comando não encontrado, execute o comando --help para mais informações."
