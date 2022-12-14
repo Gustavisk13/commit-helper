@@ -75,9 +75,9 @@ exports() {
         create_alias $local_path
         if [ $? -eq 0 ]; then
             if [[ "$shell" = "zsh" ]]; then
-                echo 'Execute o comando source ~./zshrc para finalizar a instalação!!!'
+                echo 'Execute o comando source ~/.zshrc para finalizar a instalação!!!'
             else
-                echo 'Execute o comando source ~./bashrc para finalizar a instalação!!!'
+                echo 'Execute o comando source ~/.bashrc para finalizar a instalação!!!'
             fi
 
         else
