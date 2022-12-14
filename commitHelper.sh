@@ -93,7 +93,7 @@ help_options() {
 
 check_temp(){
     temp=$(find /tmp/ -maxdepth 1 -type f -name '*.gchtext')
-    #echo $temp
+    echo $temp
 }
 
 #validates if it haves args
