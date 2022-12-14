@@ -1,14 +1,8 @@
 #!/bin/bash
 
-#some extra steps if script runs in windows
-#first its nedded to create an ~./bashrc file
-#then its needeed to export the script to the bashrc and give it an alias
-
 #further implementations
 #option if user wants to add specific file or add it all
 #option if user wants to push the commit
-#alias creation if user uses zsh:
-#sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
 current_user=$(whoami)
 tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".txt")
@@ -76,9 +70,9 @@ exports() {
         create_alias $local_path
         if [ $? -eq 0 ]; then
             if [[ "$shell" = "zsh" ]]; then
-                echo 'Execute o comando source ~./zshrc para finalizar a instalação!!!'
+                echo 'Execute o comando source ~/.zshrc para finalizar a instalação!!!'
             else
-                echo 'Execute o comando source ~./bashrc para finalizar a instalação!!!'
+                echo 'Execute o comando source ~/.bashrc para finalizar a instalação!!!'
             fi
 
         else
