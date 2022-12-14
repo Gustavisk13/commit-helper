@@ -91,6 +91,11 @@ help_options() {
     exit 0
 }
 
+check_temp(){
+    temp=$(find /tmp | grep commit-helper-)
+    echo $temp
+}
+
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
     echo "Comando não encontrado, execute o comando --help para mais informações."
@@ -108,6 +113,7 @@ elif [ "$1" = "--help" ]; then
 fi
 
 check_alias
+check_temp
 
 while true; do
     case $1 in
