@@ -23,7 +23,6 @@ check_os() {
 }
 
 create_alias() {
-    echo $shell
     if [[ "$OSTYPE" == "msys" ]]; then
 
         echo "alias gch=\"$1\"" >>C:\\Users\\$current_user\\.bashrc
@@ -288,7 +287,7 @@ while true; do
         break
         ;;
     *)
-        echo "Unknown commmand type gc help for more info!"
+        echo "Comando não encontrado, execute o comando --help para mais informações."
         exit 1
         ;;
 
@@ -297,7 +296,7 @@ done
 
 if [ -z "$flag" ]; then
     if [ -z "$2" ]; then
-        echo "You must inform an message"
+        echo "É necessário informar uma mensagem!"
         exit 1
     fi
 
@@ -307,15 +306,13 @@ if [ -z "$flag" ]; then
     fi
 
     message=$2
-    echo "Chosen option: $emoji $option"
     git commit -a -m "$emoji $option: $message"
 
 else
     if [ -z "$3" ]; then
-        echo "You must inform an message"
+        echo "É necessário informar uma mensagem!"
         exit 1
     fi
     message=$3
-    echo "Chosen option: $emoji $option $flag"
     git commit -a -m "$emoji $option: $message"
 fi
