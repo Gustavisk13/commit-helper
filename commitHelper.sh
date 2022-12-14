@@ -11,6 +11,7 @@
 #sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
 current_user=$(whoami)
+tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".txt")
 
 check_os() {
     if [[ "$OSTYPE" == "msys" ]]; then
@@ -86,10 +87,13 @@ exports() {
     else
         echo "Alias já existe, pulando instalação..."
     fi
+
+    sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >> $tempfile
+    
 }
 
 help_options() {
-    sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1
+    cat $tempfile
     exit 0
 }
 
