@@ -11,14 +11,29 @@
 #sed -i '/Example aliases/a\ alias teste=\"echo teste\"' /home/gustavo/.zshrc && source ~/.zshrc
 
 current_user=$(whoami)
-alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
-shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
+
+check_os() {
+    if [[ "$OSTYPE" == "msys" ]]; then
+        touch C:\\Users\\$current_user\\.bashrc
+        alias_value=$(cat C:\\Users\\$current_user\\.bashrc | grep "gch=")
+    else
+        alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
+        shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
+    fi
+}
 
 create_alias() {
-    if [[ "$shell" = "zsh" ]]; then
-        sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
-    elif [[ "$shell" = "bash" ]]; then
-        sed -i "/bash-doc package/a\ alias gch=\"$1\"" /home/$current_user/.bashrc
+    echo $shell
+    if [[ "$OSTYPE" == "msys" ]]; then
+
+        echo "alias gch=\"$1\"" >>C:\\Users\\$current_user\\.bashrc
+
+    else
+        if [[ "$shell" = "zsh" ]]; then
+            sed -i "/Example aliases/a\ alias gch=\"$1\"" /home/$current_user/.zshrc
+        elif [[ "$shell" = "bash" ]]; then
+            sed -i "/bash-doc package/a\ alias gch=\"$1\"" /home/$current_user/.bashrc
+        fi
     fi
 }
 
@@ -26,12 +41,6 @@ check_alias() {
     if [[ -z "$alias_value" ]]; then
         echo "Alias não encontrado, execute o arquivo com o comando --install e dê source no seu shell!"
         exit 1
-    fi
-}
-
-check_os(){
-    if [[ "$OSTYPE" == "msys" ]]; then
-        touch C:\\Users\\$current_user\\.bashrc
     fi
 }
 
@@ -63,11 +72,15 @@ validate_flag() {
 
 exports() {
     local_path="$(pwd)/commitHelper.sh"
-
     if [[ -z "$alias_value" ]]; then
         create_alias $local_path
         if [ $? -eq 0 ]; then
-            echo 'Execute o comando source para finalizar a instalação!!!'
+            if [[ "$shell" = "zsh" ]]; then
+                echo 'Execute o comando source ~./zshrc para finalizar a instalação!!!'
+            else
+                echo 'Execute o comando source ~./bashrc para finalizar a instalação!!!'
+            fi
+
         else
             echo 'Erro no Alias'
         fi
@@ -83,18 +96,21 @@ help_options() {
 
 #validates if it haves args
 if [ ! "$#" -gt 0 ]; then
-    echo "Nao Possui"
+    echo "Comando não encontrado, execute o comando --help para mais informações."
     exit 1
 fi
 
+check_os
+
 if [ "$1" = "--install" ]; then
     exports
+    exit 0
 elif [ "$1" = "--help" ]; then
     help_options
+    exit 0
 fi
 
 check_alias
-check_os
 
 while true; do
     case $1 in
