@@ -92,7 +92,7 @@ help_options() {
 }
 
 check_temp(){
-    temp=$(find /tmp/ -maxdepth 1 | grep commit-helper- )
+    temp=$(find -maxdepth 1 /tmp/ | grep commit-helper- )
     #echo $temp
 }
 
