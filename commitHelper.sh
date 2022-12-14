@@ -93,7 +93,7 @@ help_options() {
 
 check_temp(){
     temp=$(find /tmp | grep commit-helper-)
-    echo $temp
+    #echo $temp
 }
 
 #validates if it haves args
