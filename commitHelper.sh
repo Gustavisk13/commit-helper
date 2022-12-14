@@ -5,7 +5,7 @@
 #option if user wants to push the commit
 
 current_user=$(whoami)
-tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".txt")
+tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".gchtext")
 
 check_os() {
     if [[ "$OSTYPE" == "msys" ]]; then
@@ -92,7 +92,7 @@ help_options() {
 }
 
 check_temp(){
-    temp=$(find -maxdepth 1 /tmp/ | grep commit-helper- )
+    temp=$(find /tmp/ -maxdepth 1 -type f -name '*.gchtext')
     #echo $temp
 }
 
