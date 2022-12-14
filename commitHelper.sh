@@ -92,7 +92,7 @@ help_options() {
 }
 
 check_temp(){
-    temp=$(find /tmp | grep commit-helper-)
+    temp=$(find /tmp | grep commit-helper- 2>/dev/null)
     #echo $temp
 }
 
