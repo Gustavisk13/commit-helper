@@ -2,9 +2,9 @@
 This is an bash CLI tool that creates better commit messages using the best practices in version control documentation.
 
 # Installation
-Download de .zip file and unzip it.
-Open the folder in the terminal and execute the file with ```./commitHelper.sh --install```
-Source your rc file. Example ```source .zshrc``` for zsh.
+* Download de .zip file and unzip it.
+* Open the folder in the terminal and execute the file with ```./commitHelper.sh --install```
+* Source your rc file. Example ```source .zshrc``` for zsh.
 
 # Available Commands
 
