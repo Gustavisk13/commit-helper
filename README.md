@@ -44,3 +44,6 @@ This is an bash CLI tool that creates better commit messages using the best prac
 | Tratamento de erros             | error       | 🥅        |
 
 # License
+
+# Thanks
+This project was born out of inspiration for the repo [Commit Patterns](https://github.com/iuricode/padroes-de-commits) from [iuricode](https://github.com/iuricode). 
