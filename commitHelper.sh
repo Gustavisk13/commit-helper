@@ -94,9 +94,9 @@ help_options() {
 
 check_temp() {
     if [[ "$OSTYPE" == "msys" ]]; then
-        temp=$(find /tmp/ -maxdepth 1 -type f -name '*.gchtext')
+        temp=$(find C:\\Users\\$current_user\\ -maxdepth 1 -type f -name '*.gchtext')
         if [[ -z "$temp" ]]; then
-            tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".gchtext")
+            tempfile=$(mktemp C:\\Users\\$current_user\\commit-helper-XXXXX --suffix ".gchtext")
             sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >>$tempfile
         fi
     else
