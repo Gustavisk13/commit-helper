@@ -8,6 +8,8 @@ This is an bash CLI tool that creates better commit messages using the best prac
 
 # Available Commands
 
+The prefix is ```gch```
+
 | **Referência**                  | **Comando** | **Emoji** |
 |---------------------------------|-------------|-----------|
 | Acessibilidade                  | acess       | ♿         |
