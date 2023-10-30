@@ -313,7 +313,7 @@ if [ -z "$flag" ]; then
     fi
 
     message=$2
-    git commit -a -m "$emoji $option: $message"
+    git commit -m "$emoji $option: $message"
 
 else
     if [ -z "$3" ]; then
@@ -321,5 +321,5 @@ else
         exit 1
     fi
     message=$3
-    git commit -a -m "$emoji $option: $message"
+    git commit -m "$emoji $option: $message"
 fi
