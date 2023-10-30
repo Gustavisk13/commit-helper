@@ -93,10 +93,18 @@ help_options() {
 }
 
 check_temp() {
-    temp=$(find /tmp/ -maxdepth 1 -type f -name '*.gchtext')
-    if [[ -z "$temp" ]]; then
-        tempfile=$(mktemp /tmp/commit-helper-XXXXX --suffix ".gchtext")
-        sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >>$tempfile
+    if [[ "$OSTYPE" == "msys" ]]; then
+        temp=$(find C:\\Users\\$current_user\\ -maxdepth 1 -type f -name '*.gchtext')
+        if [[ -z "$temp" ]]; then
+            tempfile=$(mktemp C:\\Users\\$current_user\\commit-helper-XXXXX --suffix ".gchtext")
+            sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >>$tempfile
+        fi
+    else
+        temp=$(find /home/$current_user/.local/share/ -maxdepth 1 -type f -name '*.gchtext')
+        if [[ -z "$temp" ]]; then
+            tempfile=$(mktemp /home/$current_user/.local/share/commit-helper-XXXXX --suffix ".gchtext")
+            sed -n '/^# Available Commands$/,/^# License$/p' README.md | head -n -1 >>$tempfile
+        fi
     fi
 }
 
