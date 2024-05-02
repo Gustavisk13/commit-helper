@@ -11,8 +11,15 @@ check_os() {
         touch C:\\Users\\$current_user\\.bashrc
         alias_value=$(cat C:\\Users\\$current_user\\.bashrc | grep "gch=")
     else
-        alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
-        shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
+
+        if [[ -z $(grep "^$USER" /etc/passwd | grep -o zsh) ]]; then
+            shell=$(grep "^$USER" /etc/passwd | grep -o bash)
+        else
+            shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
+        fi
+
+        # alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
+        # shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
     fi
 }
 
