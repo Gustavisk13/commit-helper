@@ -13,10 +13,16 @@ check_os() {
     else
 
         if [[ -z $(grep "^$USER" /etc/passwd | grep -o zsh) ]]; then
+
+            alias_value=$(cat /home/$current_user/.bashrc | grep "gch=")
             shell=$(grep "^$USER" /etc/passwd | grep -o bash)
+            
         else
+
+            alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
             shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
         fi
+        
 
         # alias_value=$(cat /home/$current_user/.zshrc | grep "gch=")
         # shell=$(grep "^$USER" /etc/passwd | grep -o zsh)
