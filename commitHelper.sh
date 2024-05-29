@@ -334,7 +334,22 @@ if [ -z "$flag" ]; then
     fi
 
     message=$2
-    git commit -m "$emoji $option: $message"
+
+    no_verify=0
+
+    if [ ! -z "$3"]; then
+        if [ "$3" = "--no-verify" ]; then
+            no_verify=1
+        fi
+    fi
+
+    if [ $no_verify -eq 1 ]; then
+        git commit --no-verify -m "$emoji $option: $message"
+    else
+        git commit -m "$emoji $option: $message"
+    fi
+
+    # git commit -m "$emoji $option: $message"
 
 else
     if [ -z "$3" ]; then
@@ -342,5 +357,18 @@ else
         exit 1
     fi
     message=$3
-    git commit -m "$emoji $option: $message"
+
+    no_verify=0
+
+    if [ ! -z "$4"]; then
+        if [ "$4" = "--no-verify" ]; then
+            no_verify=1
+        fi
+    fi
+
+    if [ $no_verify -eq 1 ]; then
+        git commit --no-verify -m "$emoji $option: $message"
+    else
+
+    # git commit -m "$emoji $option: $message"
 fi
