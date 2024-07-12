@@ -368,7 +368,6 @@ else
 
     if [ $no_verify -eq 1 ]; then
         git commit --no-verify -m "$emoji $option: $message"
-    else
-
+	fi
     # git commit -m "$emoji $option: $message"
 fi
